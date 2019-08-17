@@ -18,6 +18,8 @@ for guessesTaken in range(6):
         print('Too high ma friend')
 
     if guess == number:
-        guessesTaken = str(guessesTaken + 1)
+        guessesTaken = guessesTaken + 1
         print("Good job, %s, you guessed my number in %s guesses!" % (name, guessesTaken))
         exit()
+
+print("%s, you've had too many guesses. The correct number was %s" % (name, number))
