@@ -35,12 +35,12 @@ class Connect4:
         for row in self.board:
             for hole in row:
                 if hole == 0:
-                    print('⚪', end=' ')
+                    print("\033[1;30m⚪", end=' ')
                 elif hole == 1:
-                    print('🔴', end=' ')
+                    print("\033[1;31m🔴", end=' ')
                 elif hole == 2:
-                    print('🔵', end=' ')
-            print()
+                    print("\033[1;33m🔵", end=' ')
+            print("\033[1;30m")
         print('1  2 3  4  5  6 7')
         print('')
 
