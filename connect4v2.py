@@ -3,7 +3,7 @@ class Connect4:
     def __init__(self):
         print('hello')
         self.get_player_names()
-        self.whose_go = 0
+        self.whose_go = 1
         self.there_is_a_winner = False
         self.initialise_board()
 
@@ -19,17 +19,38 @@ class Connect4:
 
     def play(self):
         self.draw_board()
-        print('Where would you like to go,', self.players[self.whose_go])
+        print('Where would you like to go,', self.player_name())
         column = int(input()) - 1
-        self.add_counter(column, self.whose_go + 1)
+        self.add_counter(column, self.whose_go)
         if self.player_has_won():
-            print('Hooray')
+            self.draw_board()
+            print(self.player_name(), ', you have defeated your opponent and now you are better than them at connect 4! you banana')
             self.there_is_a_winner = True
         else:
-            self.whose_go = 1 - self.whose_go
+            self.whose_go = 2 - (self.whose_go -  1)
+
+    def player_name(self):
+        return self.players[self.whose_go - 1]
 
     def player_has_won(self):
-        False
+        if self.counters_underneath() == 3:
+            return True
+        return False
+
+    def counters_underneath(self):
+        if self.last_row == 5:
+            return 0
+        if self.board[self.last_row + 1][self.last_column] != self.whose_go:
+            return 0
+        if self.last_row == 4:
+            return 1
+        if self.board[self.last_row + 2][self.last_column] != self.whose_go:
+            return 1
+        if self.last_row == 3:
+            return 2
+        if self.board[self.last_row + 3][self.last_column] != self.whose_go:
+            return 2
+        return 3
 
     def draw_board(self):
         for row in self.board:
@@ -45,9 +66,11 @@ class Connect4:
         print('')
 
     def add_counter(self, column, player):
-        for row_index in range(len(self.board) - 1, 0, -1):
-            if self.board[row_index][column] == 0:
-                self.board[row_index][column] = player
+        for row in range(len(self.board) - 1, 0, -1):
+            if self.board[row][column] == 0:
+                self.board[row][column] = player
+                self.last_column = column
+                self.last_row = row
                 break
 
 
