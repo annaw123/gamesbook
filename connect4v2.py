@@ -35,7 +35,98 @@ class Connect4:
     def player_has_won(self):
         if self.counters_underneath() == 3:
             return True
+        if self.counters_diagonal1() + self.counters_diagonal2() == 3:
+            return True
+        if self.counters_left() + self.counters_right() == 3:
+            return True
+        if self.counters_diagonal_downl() + self.counters_diagonal_upr() == 3:
+            return True
+            return True
         return False
+
+    def counters_diagonal_downl(self):
+        if self.last_row == 1:
+            return 0
+        if self.last_column == 1:
+            return 0
+        if self.board[self.last_row + 1][self.last_column - 1] != self.whose_go:
+            return 0
+        if self.last_row == 0:
+            return 1
+        if self.last_column == 1:
+            return 1
+        if self.board[self.last_row + 2][self.last_column - 2] != self.whose_go:
+            return 1
+        if self.last_row == 0:
+            return 2
+        if self.last_column == 2:
+            return 2
+        if self.board[self.last_row + 3][self.last_column - 3] != self.whose_go:
+            return 2
+        return 3
+
+    def counters_diagonal_upr(self):
+        if self.last_row == 0:
+            return 0
+        if self.last_column == 6:
+            return 0
+        if self.board[self.last_row - 1][self.last_column + 1] != self.whose_go:
+            return 0
+        if self.last_row == 1:
+            return 1
+        if self.last_column == 5:
+            return 1
+        if self.board[self.last_row - 2][self.last_column + 2] != self.whose_go:
+            return 1
+        if self.last_row == 2:
+            return 2
+        if self.last_column == 4:
+            return 2
+        if self.board[self.last_row - 3][self.last_column + 3] != self.whose_go:
+            return 2
+        return 3
+
+    def counters_diagonal1(self):
+        if self.last_row == 5:
+            return 0
+        if self.last_column == 6:
+            return 0
+        if self.board[self.last_row + 1][self.last_column + 1] != self.whose_go:
+            return 0
+        if self.last_row == 4:
+            return 1
+        if self.last_column == 5:
+            return 1
+        if self.board[self.last_row + 2][self.last_column + 2] != self.whose_go:
+            return 1
+        if self.last_row == 3:
+            return 2
+        if self.last_column == 4:
+            return 2
+        if self.board[self.last_row + 3][self.last_column + 3] != self.whose_go:
+            return 2
+        return 3
+
+    def counters_diagonal2(self):
+        if self.last_row == 5:
+            return 0
+        if self.last_column == 0:
+            return 0
+        if self.board[self.last_row - 1][self.last_column - 1] != self.whose_go:
+            return 0
+        if self.last_row == 4:
+            return 1
+        if self.last_column == 1:
+            return 1
+        if self.board[self.last_row - 2][self.last_column - 2] != self.whose_go:
+            return 1
+        if self.last_row == 3:
+            return 2
+        if self.last_column == 2:
+            return 2
+        if self.board[self.last_row - 3][self.last_column - 3] != self.whose_go:
+            return 2
+        return 3
 
     def counters_underneath(self):
         if self.last_row == 5:
@@ -49,6 +140,36 @@ class Connect4:
         if self.last_row == 3:
             return 2
         if self.board[self.last_row + 3][self.last_column] != self.whose_go:
+            return 2
+        return 3
+
+    def counters_left(self):
+        if self.last_column == 0:
+            return 0
+        if self.board[self.last_row ][self.last_column - 1] != self.whose_go:
+            return 0
+        if self.last_column == 1:
+            return 1
+        if self.board[self.last_row][self.last_column - 2] != self.whose_go:
+            return 1
+        if self.last_column == 2:
+            return 2
+        if self.board[self.last_row][self.last_column - 3] != self.whose_go:
+            return 2
+        return 3
+
+    def counters_right(self):
+        if self.last_column == 6:
+            return 0
+        if self.board[self.last_row][self.last_column + 1] != self.whose_go:
+            return 0
+        if self.last_column == 5:
+            return 1
+        if self.board[self.last_row][self.last_column + 2] != self.whose_go:
+            return 1
+        if self.last_column == 4:
+            return 2
+        if self.board[self.last_row][self.last_column + 3] != self.whose_go:
             return 2
         return 3
 
