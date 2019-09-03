@@ -28,7 +28,7 @@ class Connect4:
             print(self.player_name(), ', you have defeated your opponent and now you are better than them at connect 4! you banana')
             self.there_is_a_winner = True
         else:
-            self.whose_go = 2 - (self.whose_go -  1)
+            self.whose_go = 2 - (self.whose_go - 1)
 
     def player_name(self):
         return self.players[self.whose_go - 1]
@@ -146,7 +146,7 @@ class Connect4:
     def counters_left(self):
         if self.last_column == 0:
             return 0
-        if self.board[self.last_row ][self.last_column - 1] != self.whose_go:
+        if self.board[self.last_row][self.last_column - 1] != self.whose_go:
             return 0
         if self.last_column == 1:
             return 1
@@ -195,9 +195,7 @@ class Connect4:
                 break
 
 
-
 game = Connect4()
 
 while not game.there_is_a_winner:
     game.play()
-
