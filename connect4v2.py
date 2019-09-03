@@ -1,6 +1,11 @@
 class Connect4:
 
     def __init__(self):
+        self.players = None
+        self.board = None
+        self.last_column = None
+        self.last_row = None
+
         print('hello')
         self.get_player_names()
         self.whose_go = 1
@@ -11,11 +16,7 @@ class Connect4:
         self.players = ['anna', 'peter']
 
     def initialise_board(self):
-        n = 6
-        m = 7
-        self.board = [0] * n
-        for i in range(n):
-            self.board[i] = [0] * m
+        self.board = [[0 for _i in range(7)] for _j in range(6)]
 
     def play(self):
         self.draw_board()
@@ -35,29 +36,28 @@ class Connect4:
     def player_has_won(self):
         if self.counters_underneath() == 3:
             return True
-        if self.counters_diagonal1() + self.counters_diagonal2() == 3:
+        if self.counters_diagonal_down_right() + self.counters_diagonal_up_left() == 3:
             return True
         if self.counters_left() + self.counters_right() == 3:
             return True
-        if self.counters_diagonal_downl() + self.counters_diagonal_upr() == 3:
-            return True
+        if self.counters_diagonal_down_left() + self.counters_diagonal_up_right() == 3:
             return True
         return False
 
-    def counters_diagonal_downl(self):
-        if self.last_row == 1:
+    def counters_diagonal_down_left(self):
+        if self.last_row == 5:
             return 0
         if self.last_column == 1:
             return 0
         if self.board[self.last_row + 1][self.last_column - 1] != self.whose_go:
             return 0
-        if self.last_row == 0:
+        if self.last_row == 4:
             return 1
         if self.last_column == 1:
             return 1
         if self.board[self.last_row + 2][self.last_column - 2] != self.whose_go:
             return 1
-        if self.last_row == 0:
+        if self.last_row == 3:
             return 2
         if self.last_column == 2:
             return 2
@@ -65,7 +65,7 @@ class Connect4:
             return 2
         return 3
 
-    def counters_diagonal_upr(self):
+    def counters_diagonal_up_right(self):
         if self.last_row == 0:
             return 0
         if self.last_column == 6:
@@ -86,7 +86,7 @@ class Connect4:
             return 2
         return 3
 
-    def counters_diagonal1(self):
+    def counters_diagonal_down_right(self):
         if self.last_row == 5:
             return 0
         if self.last_column == 6:
@@ -107,7 +107,7 @@ class Connect4:
             return 2
         return 3
 
-    def counters_diagonal2(self):
+    def counters_diagonal_up_left(self):
         if self.last_row == 5:
             return 0
         if self.last_column == 0:
@@ -198,8 +198,6 @@ class Connect4:
 
 game = Connect4()
 
-while game.there_is_a_winner == False:
+while not game.there_is_a_winner:
     game.play()
-
-
 
